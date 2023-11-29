@@ -5,7 +5,7 @@
 
 
 class pokemon {
-    name;
+    #name;
     #attack; // you set an attribute as private putting an # before the name
     #defence; // you set an attribute as private putting an # before the name
     #lp; // you set an attribute as private putting an # before the name
@@ -16,6 +16,7 @@ class pokemon {
   
     async #setData(name){ // you set a as private putting an # before the name
         try { // setting the data of the pokemon
+            name = name.toLowerCase(); // set the name to lowercase
             const response = await fetch('https://pokeapi.co/api/v2/pokemon/' + name); 
             const data = await response.json();
             const attack = data.stats.find(stat => stat.stat.name === 'attack').base_stat;
@@ -24,7 +25,7 @@ class pokemon {
             this.#attack = attack;
             this.#defence = defence;
             this.#lp = hp;
-            this.name = name;
+            this.#name = name;
         } catch (error) {
             console.error('Error:', error);
         }
@@ -44,9 +45,9 @@ class pokemon {
 
     print() {
         setTimeout(() => {
-            console.log(this.name + " attack is: " + this.getAttack()); // logs the attack stat of the pokemon
-            console.log(this.name + " defence is: " + this.getDefence()); // logs the defence stat of the pokemon
-            console.log(this.name + " life points are: "+ this.getLifePoints()); // logs the life points of the pokemon
+            console.log(this.#name + " attack is: " + this.getAttack()); // logs the attack stat of the pokemon
+            console.log(this.#name + " defence is: " + this.getDefence()); // logs the defence stat of the pokemon
+            console.log(this.#name + " life points are: "+ this.getLifePoints()); // logs the life points of the pokemon
         }, 2000);
 
     }
